@@ -3,15 +3,14 @@ import { Paginated } from "../types/apollo";
 import { MemoTest } from "../types/memotest";
 
 export type GET_MEMOTESTS_PAGINATED = {
-    memoTests: Paginated<MemoTest>;
+  memoTests: Paginated<MemoTest>;
 };
 
 export const GET_MEMOTESTS_PAGINATED = gql`
   query GET_MEMOTESTS_PAGINATED($page: Int!) {
-    memoTests(page: $page, first: 10) {
+    memoTests(page: $page, first: 9) {
       paginatorInfo {
         total
-        count
         perPage
       }
       data {

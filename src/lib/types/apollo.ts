@@ -1,10 +1,10 @@
-export type Paginatorinfo = {
+export type PaginatorInfo = {
     total: number;
-    count: number;
+    perPage: number;
 }
 
 export type Paginated<T> = {
-    paginatorInfo: Paginatorinfo;
+    paginatorInfo: PaginatorInfo;
     data: T[];
 };
 
