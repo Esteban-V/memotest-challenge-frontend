@@ -1,4 +1,4 @@
-import GridList from "@/components/memo-grid";
+import MemoTestList from "@/components/memotest/grid";
 import { GET_MEMOTESTS_PAGINATED } from "@/lib/queries/memotest";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
@@ -24,7 +24,7 @@ export default function Home() {
       {!data || loading || error ? (
         <div>Loading...</div>
       ) : (
-        <GridList
+        <MemoTestList
           buttonClickHandler={() => {}}
           handlePageChange={setPage}
           items={data.memoTests.data}
