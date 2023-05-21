@@ -3,7 +3,7 @@ import { MemoTest } from "@/lib/types/memotest";
 
 export interface GridListProps {
   items: MemoTest[];
-  buttonClickHandler: (index: number) => void;
+  itemClickHandler: (memotest: MemoTest) => void;
   handlePageChange: (page: number) => void;
   currentPage: number;
   paginatorInfo: PaginatorInfo;

@@ -9,7 +9,7 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
 
   return (
     <button
-      onClick={() => buttonClickHandler(item.id)}
+      onClick={() => buttonClickHandler(item)}
       className={`
           bg-purple-500 hover:bg-purple-600 text-white
           p-4 rounded-3xl w-40 flex flex-col items-center hover:scale-105 transition-all

@@ -4,7 +4,7 @@ import { GridListProps } from "./types";
 
 const MemoTestList: React.FC<GridListProps> = ({
     items,
-    buttonClickHandler,
+    itemClickHandler,
     handlePageChange,
     currentPage,
     paginatorInfo,
@@ -16,7 +16,7 @@ const MemoTestList: React.FC<GridListProps> = ({
             <MemoTestInfoCard
               key={index}
               item={item}
-              buttonClickHandler={buttonClickHandler}
+              buttonClickHandler={itemClickHandler}
             />
           ))}
         </div>
