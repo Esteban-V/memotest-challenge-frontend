@@ -33,6 +33,7 @@ export const GameDataProvider = ({ children }: { children: React.ReactNode }) =>
 
   const setCurrentSession = (session: GameSession) => {
     session.calculated_cards = calculateCards(session);
+    session.progress = [];
     gameData.sessions.push(session);
 
     const updatedGameData = {

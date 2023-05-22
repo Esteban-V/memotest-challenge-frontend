@@ -22,7 +22,8 @@ export const calculateCards = (session: GameSession) => {
 
   const duplicatedImages = [...selectedImages, ...selectedImages];
 
-  let shuffledCards: Card[] = duplicatedImages.map((image, _) => ({
+  let shuffledCards: Card[] = duplicatedImages.map((image, index) => ({
+    position: index,
     image_url: image,
   }));
 
