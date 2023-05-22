@@ -4,9 +4,6 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
   item,
   buttonClickHandler,
 }) => {
-  const rotation = [3, 6, 12];
-  const randomRotation = rotation[Math.floor(Math.random() * rotation.length)];
-
   return (
     <button
       onClick={() => buttonClickHandler(item)}
@@ -16,7 +13,7 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
           `}
     >
       <h2 className="font-bold text-lg">{`#${item.id} - ${item.name}`}</h2>
-      <span className="text-lg underline">Play</span>
+      <span className="text-lg underline mt-2">Play</span>
     </button>
   );
 };
