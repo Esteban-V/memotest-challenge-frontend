@@ -1,0 +1,35 @@
+import { Card, GameSession } from "@/lib/types";
+
+export const calculateCards = (session: GameSession) => {
+  if (session.calculated_cards?.length == session.number_of_pairs) {
+    return session.calculated_cards;
+  }
+
+  const { image_urls } = session.memo_test;
+  const { number_of_pairs: pairs } = session;
+
+  const selectedImages: string[] = [];
+  const usedIndices = new Set<number>();
+
+  while (selectedImages.length < pairs) {
+    const imageIndex = Math.floor(Math.random() * image_urls.length);
+
+    if (!usedIndices.has(imageIndex)) {
+      selectedImages.push(image_urls[imageIndex]);
+      usedIndices.add(imageIndex);
+    }
+  }
+
+  const duplicatedImages = [...selectedImages, ...selectedImages];
+
+  let shuffledCards: Card[] = duplicatedImages.map((image, _) => ({
+    image_url: image,
+  }));
+
+  for (let i = shuffledCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
+  }
+
+  return shuffledCards;
+};
