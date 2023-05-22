@@ -25,6 +25,8 @@ export default function Home() {
 
     if (errors) {
       console.log(errors);
+    } else if (data) {
+      //dispatch(setGameSession(data.startGameSession));
     }
 
     push('/game');
