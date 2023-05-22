@@ -1,5 +1,5 @@
 export type MemoTest = {
   id: number;
   name: string;
-  description: string;
+  image_urls: string[];
 }

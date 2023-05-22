@@ -16,6 +16,7 @@ export const GET_MEMOTESTS_PAGINATED = gql`
       data {
         id
         name
+        image_urls
       }
     }
   }
