@@ -19,7 +19,7 @@ const BaseModal: React.FC<ModalProps> = ({ onClose, children }) => {
         >
           x
         </button>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
             {children}
         </div>
       </div>
