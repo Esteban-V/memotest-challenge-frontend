@@ -4,8 +4,7 @@ import { GridListProps } from "./types";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { MemoTest } from "@/lib/types/memotest";
-import { GET_MEMOTESTS_PAGINATED_TYPE } from "@/lib/queries/memotest";
-import { GET_MEMOTESTS_PAGINATED } from "@/lib/queries/gamesession";
+import { GET_MEMOTESTS_PAGINATED, GET_MEMOTESTS_PAGINATED_TYPE } from "@/lib/queries/memoTest";
 
 const MemoTestList: React.FC<GridListProps> = ({ itemClickHandler }) => {
   const [page, setPage] = useState(1);

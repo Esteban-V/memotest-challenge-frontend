@@ -21,9 +21,9 @@ export const START_GAME_SESSION_MUTATION = gql`
   }
 `;
 
-export const GET_MEMOTESTS_PAGINATED = gql`
-  mutation GET_MEMOTESTS_PAGINATED($memoTestId: ID!, $numberOfPairs: Int!) {
-    startGameSession(memoTestId: $memoTestId, numberOfPairs: $numberOfPairs) {
+export const INCREMENT_GAME_SESSION_RETRIES = gql`
+  mutation GET_MEMOTESTS_PAGINATED($gameSessionId: ID!) {
+    addTry(gameSessionId: $gameSessionId) {
       id
       number_of_pairs
       retries
