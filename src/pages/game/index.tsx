@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import FlipCard from "@/components/memotest/game/flip-card";
 import { useGameData } from "@/context/GameDataContext";
 import { Card } from "@/lib/types";
+import { INCREMENT_GAME_SESSION_RETRIES } from '@/lib/queries/gameSession';
 
 const Game: React.FC = () => {
   const { gameData, updateSession } = useGameData();
+  const [incrementRetries] = useMutation(INCREMENT_GAME_SESSION_RETRIES);
   const [flippedCards, setFlippedCards] = useState<(Card | null)[]>([null, null]);
 
+  // Add effect to unflip the cards if they do not match after 1 second
   useEffect(() => {
     const timer = setTimeout(() => {
       if (flippedCards[0] && flippedCards[1] && flippedCards[0].image_url !== flippedCards[1].image_url) {
@@ -17,19 +21,27 @@ const Game: React.FC = () => {
     return () => clearTimeout(timer);
   }, [flippedCards]);
 
-  const flipCard = (card: Card) => {
+  const flipCard = async (card: Card) => {
     const currentSession = gameData?.current_session;
     const progress = currentSession?.progress;
 
     if (!flippedCards[0]) {
       setFlippedCards([card, null]);
+
+      // Increment the retries both locally and on the server
+      if (currentSession) {
+        currentSession.retries += 1;
+        updateSession(currentSession);
+        incrementRetries({ variables: { gameSessionId: currentSession.id } });
+      }
     } else if (flippedCards[0] && !flippedCards[1]) {
       if (flippedCards[0].image_url === card.image_url) {
+        // If the two cards match, add to progress and unflip the cards
         progress && progress.push(card.image_url);
         currentSession && updateSession(currentSession);
         setFlippedCards([null, null]);
       } else {
-        setFlippedCards(prev => [prev[0], card]);
+        setFlippedCards([flippedCards[0], card]);
       }
     }
   };
@@ -51,7 +63,7 @@ const Game: React.FC = () => {
       <div className={`grid grid-cols-4 gap-1 w-fit rounded-3xl bg-gray-200 p-5`}>
         {cards.map((card, index) => (
           <FlipCard
-            key={card.position} // or use a unique id for the key if available
+            key={card.position}
             isFlipped={isCardFlipped(card)}
             onClick={() => flipCard(card)}
             backImage={card.image_url}
