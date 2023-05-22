@@ -3,10 +3,10 @@ import { useState } from "react";
 import { CreateModalProps } from "./types";
 
 const CreateModal: React.FC<CreateModalProps> = ({ memoTest, onClose, onStart }) => {
-	const [pairCount, setPairCount] = useState(1);
-
 	const minPairs = memoTest?.image_urls.length / 2 || 1;
 	const maxPairs = memoTest?.image_urls.length;
+	
+	const [pairCount, setPairCount] = useState(minPairs);
 
 	const incrementPairCount = () => {
 		if (pairCount < maxPairs) {
