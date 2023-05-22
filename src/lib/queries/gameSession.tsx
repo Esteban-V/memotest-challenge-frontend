@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { GameSession } from "../types/memotest";
+import { GameSession } from "../types";
 
 export type START_GAME_SESSION_TYPE = {
   startGameSession: GameSession;

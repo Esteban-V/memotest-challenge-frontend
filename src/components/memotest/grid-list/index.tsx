@@ -3,7 +3,7 @@ import MemoTestInfoCard from "../info-card";
 import { GridListProps } from "./types";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { MemoTest } from "@/lib/types/memotest";
+import { MemoTest } from "@/lib/types";
 import { GET_MEMOTESTS_PAGINATED, GET_MEMOTESTS_PAGINATED_TYPE } from "@/lib/queries/memoTest";
 
 const MemoTestList: React.FC<GridListProps> = ({ itemClickHandler }) => {

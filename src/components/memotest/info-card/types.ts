@@ -1,4 +1,4 @@
-import { MemoTest } from "@/lib/types/memotest";
+import { MemoTest } from "@/lib/types";
 
 export interface MemoTestInfoCardProps {
   item: MemoTest;

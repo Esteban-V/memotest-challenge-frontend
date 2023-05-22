@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { Paginated } from "../types/apollo";
-import { MemoTest } from "../types/memotest";
+import { MemoTest } from "../types";
 
 export type GET_MEMOTESTS_PAGINATED_TYPE = {
   memoTests: Paginated<MemoTest>;
