@@ -5,15 +5,23 @@ export type MemoTest = {
 }
 
 export type Card = {
+  position: number;
   image_url: string;
+}
+
+enum GameState {
+  Started,
+  Completed
 }
 
 export type GameSession = {
   id: number;
   number_of_pairs: number;
+  state: GameState;
   retries: number;
   memo_test: MemoTest;
   calculated_cards?: Card[];
+  progress: string[]; // Already flipped images
   created_at: string;
 }
 
