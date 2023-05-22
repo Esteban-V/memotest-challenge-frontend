@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { Paginated } from "../types/apollo";
 import { MemoTest } from "../types/memotest";
 
-export type GET_MEMOTESTS_PAGINATED = {
+export type GET_MEMOTESTS_PAGINATED_TYPE = {
   memoTests: Paginated<MemoTest>;
 };
 
@@ -16,7 +16,6 @@ export const GET_MEMOTESTS_PAGINATED = gql`
       data {
         id
         name
-        image_urls
       }
     }
   }
