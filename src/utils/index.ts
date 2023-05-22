@@ -34,3 +34,7 @@ export const calculateCards = (session: GameSession) => {
 
   return shuffledCards;
 };
+
+export const getPastSessions = (sessions: GameSession[], memotest: number) => {
+  return sessions.filter((session) => session.memo_test.id === memotest);
+}

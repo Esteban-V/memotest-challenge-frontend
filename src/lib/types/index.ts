@@ -22,6 +22,7 @@ export type GameSession = {
   memo_test: MemoTest;
   calculated_cards?: Card[];
   progress: string[]; // Already flipped images
+  score: number;
   created_at: string;
 }
 
