@@ -1,3 +1,4 @@
+import { GameDataProvider } from "@/context/GameDataContext";
 import { useApollo } from "@/lib/apolloClient";
 import "@/styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
@@ -11,9 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <main className={roboto.className}>
-        <Component {...pageProps} />
-      </main>
+      <GameDataProvider>
+        <main className={roboto.className}>
+          <Component {...pageProps} />
+        </main>
+      </GameDataProvider>
     </ApolloProvider>
   );
 }

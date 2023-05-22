@@ -1,12 +1,14 @@
 import CreateModal from "@/components/memotest/create-modal";
 import MemoTestList from "@/components/memotest/grid-list";
+import { useGameData } from "@/context/GameDataContext";
 import { initializeApollo } from "@/lib/apolloClient";
 import { START_GAME_SESSION_MUTATION } from "@/lib/queries/gameSession";
-import { MemoTest } from "@/lib/types/memotest";
+import { MemoTest } from "@/lib/types";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Home() {
+  const { setCurrentSession } = useGameData();
   const [selectedMemoTest, setSelectedMemoTest] = useState<MemoTest | null>(
     null
   );
@@ -26,7 +28,7 @@ export default function Home() {
     if (errors) {
       console.log(errors);
     } else if (data) {
-      //dispatch(setGameSession(data.startGameSession));
+      setCurrentSession(data.startGameSession);
     }
 
     push('/game');
