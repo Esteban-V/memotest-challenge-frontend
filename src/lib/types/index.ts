@@ -9,7 +9,7 @@ export type Card = {
   image_url: string;
 }
 
-enum GameState {
+export enum GameState {
   Started,
   Completed
 }

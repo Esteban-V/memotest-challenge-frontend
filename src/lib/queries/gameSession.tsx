@@ -21,6 +21,22 @@ export const START_GAME_SESSION_MUTATION = gql`
   }
 `;
 
+export const END_GAME_SESSION_RETRIES = gql`
+  mutation END_GAME_SESSION_RETRIES($gameSessionId: ID!) {
+    endGameSession(gameSessionId: $gameSessionId) {
+      id
+      number_of_pairs
+      retries
+      memo_test {
+        id
+        name
+        image_urls
+      }
+      created_at
+    }
+  }
+`;
+
 export const INCREMENT_GAME_SESSION_RETRIES = gql`
   mutation GET_MEMOTESTS_PAGINATED($gameSessionId: ID!) {
     addTry(gameSessionId: $gameSessionId) {
