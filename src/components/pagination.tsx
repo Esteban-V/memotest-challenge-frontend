@@ -1,14 +1,12 @@
 import { PaginatorInfo } from "@/lib/types/apollo";
 
 interface PaginationProps {
-  currentPage: number;
   paginatorInfo: PaginatorInfo;
   onPageChange: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  paginatorInfo: { total, perPage },
+  paginatorInfo: { total, perPage, currentPage },
   onPageChange,
 }) => {
   const pagesCount = Math.ceil(total / perPage);
