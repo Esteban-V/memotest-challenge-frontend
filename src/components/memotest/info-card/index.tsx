@@ -14,12 +14,17 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
     <button
       onClick={() => buttonClickHandler(item)}
       className={`
-          bg-purple-500 hover:bg-purple-600 text-white
-          p-4 rounded-3xl w-40 flex flex-col items-center hover:scale-105 transition-all group
+          bg-purple-500 hover:bg-purple-600 text-white h-40 w-40
+          p-4 rounded-3xl flex flex-col justify-between items-center hover:scale-105 transition-all group
           `}
     >
       <h2 className="font-bold text-lg">{`#${item.id} - ${item.name}`}</h2>
-      {!highestScore && (<span><strong>Highest score: </strong>{highestScore}</span>)}
+      {!!highestScore && (
+        <>
+          <span className="font-bold">Highest score:</span>
+          <span>{highestScore}</span>
+        </>
+      )}
       <span className="text-lg h-fit mt-2 p-2 rounded-xl group-hover:font-bold group-hover:bg-white group-hover:text-black">Play</span>
     </button>
   );

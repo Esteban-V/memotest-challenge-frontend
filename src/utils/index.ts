@@ -44,7 +44,8 @@ export const getHighestScore = (sessions: GameSession[] | undefined, memotest: n
 
   const pastSessions = getPastSessions(sessions, memotest);
   const scores = pastSessions.map((session) => session.score);
-  return Math.max(...scores);
+
+  return !!scores.length ? Math.max(...scores) : 0;
 }
 
 export const isServer = () => typeof window === 'undefined';

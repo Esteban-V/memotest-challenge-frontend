@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       <div
-        className="flex flex-row justify-center items-center min-h-screen min-w-max p-[5%] gap-5"
+        className="flex flex-col-reverse sm:flex-row justify-center items-center min-h-screen min-w-max p-[5%] gap-5"
       >
         {!!gameData?.sessions.length && <div className="w-3/5 p-10 rounded-3xl bg-gray-100">
           <SessionCardList
