@@ -1,8 +1,8 @@
 import BaseModal from "@/components/base-modal";
 import { useState } from "react";
-import { CreateModalProps } from "./types";
+import { NewGameModalProps } from "./types";
 
-const CreateModal: React.FC<CreateModalProps> = ({ memoTest, onClose, onStart }) => {
+const NewGameModal: React.FC<NewGameModalProps> = ({ memoTest, onClose, onStart }) => {
 	const minPairs = 2;
 	const maxPairs = Math.min(memoTest?.image_urls.length, 12);
 
@@ -51,4 +51,4 @@ const CreateModal: React.FC<CreateModalProps> = ({ memoTest, onClose, onStart })
 	);
 };
 
-export default CreateModal;
+export default NewGameModal;

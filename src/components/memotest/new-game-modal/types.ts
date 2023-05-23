@@ -1,6 +1,6 @@
 import { MemoTest } from "@/lib/types";
 
-export interface CreateModalProps {
+export interface NewGameModalProps {
   memoTest: MemoTest;
   onClose: () => void;
   onStart: (item: MemoTest, pairCount: number) => void;

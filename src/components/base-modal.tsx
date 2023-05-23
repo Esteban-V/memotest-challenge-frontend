@@ -1,5 +1,5 @@
 interface ModalProps {
-  onClose: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
 }
 
