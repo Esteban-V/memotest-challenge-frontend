@@ -7,14 +7,15 @@ const SessionCard: React.FC<SessionCardProps> = ({ gameSession, onClick }) => {
 
   return (
     <>
-      <div className="flex flex-row cursor-pointer shadow-lg rounded-2xl justify-between p-4 bg-white">
+      <div className="flex flex-row cursor-pointer shadow-lg h-24 rounded-2xl justify-between p-4 bg-white">
         <div className="w-full flex flex-col justify-center">
           <h1 className="font-bold text-xl">{`#${id} | ${memo_test.name}`}</h1>
-          <span>Number of pairs: {number_of_pairs}</span>
-          {score && (<span>Score: {score}</span>)}
+          <span><strong>Number of pairs:</strong> {number_of_pairs}</span>
+          {!!score && (<span><strong>Score:</strong> {score}</span>)}
         </div>
         {(state != GameState.Completed) &&
-          <button onClick={onClick} className="p-2 bg-purple-500 hover:bg-purple-600 text-lg h-fit self-center text-white rounded-2xl hover:underline">Resume</button>
+          <button onClick={() => { onClick(gameSession) }} className="p-2 bg-purple-500 hover:bg-purple-600 h-fit self-center
+          text-white rounded-2xl hover:font-bold hover:scale-105 transition-all">Resume</button>
         }
       </div>
     </>
