@@ -7,6 +7,7 @@ import { END_GAME_SESSION, END_GAME_SESSION_TYPE, INCREMENT_GAME_SESSION_RETRIES
 import ReactConfetti from 'react-confetti';
 import { AiOutlineLeftCircle } from "react-icons/ai"
 import { useRouter } from 'next/router';
+import EndModal from '@/components/memotest/game/end-modal';
 
 
 const Game: React.FC = () => {
@@ -54,6 +55,7 @@ const Game: React.FC = () => {
         // If the progress is complete, end the game
         if (progress && progress.length === currentSession?.number_of_pairs) {
           const session = await endGameSession({ variables: { gameSessionId: currentSession.id } });
+          currentSession.score = session.data?.endGameSession.score || 0;
           updateSession(session.data?.endGameSession!);
           setIsExploding(session.data?.endGameSession.state === GameState.Completed);
         }
@@ -91,7 +93,7 @@ const Game: React.FC = () => {
           <div className="flex flex-col">
             <span className="text-2xl"><strong>Retries:</strong> {currentSession?.retries}</span>
           </div>
-          <div className="grid grid-cols-4 gap-1 w-fit rounded-3xl bg-gray-200 p-5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-fit rounded-3xl bg-gray-200 p-5">
             {cards.map((card, index) => (
               <FlipCard
                 key={card.position}
@@ -104,6 +106,11 @@ const Game: React.FC = () => {
         </div>
 
       </div>
+
+      {isExploding && (<EndModal
+        onClick={() => push('/')}
+        score={currentSession?.score || 0}
+      />)}
     </>
 
   );
