@@ -15,11 +15,11 @@ const Game: React.FC = () => {
   const { gameData, updateSession } = useGameData();
 
   const [isExploding, setIsExploding] = useState(false);
+  const [showCloseModal, setShowCloseModal] = useState(false);
 
   const [incrementRetries] = useMutation(INCREMENT_GAME_SESSION_RETRIES);
   const [endGameSession] = useMutation<END_GAME_SESSION_TYPE>(END_GAME_SESSION);
   const [flippedCards, setFlippedCards] = useState<(Card | null)[]>([null, null]);
-  const [matchedCards, setMatchedCards] = useState<Card[]>([]);
 
   const currentSession = gameData?.current_session;
   const progress = currentSession?.progress;
@@ -58,6 +58,7 @@ const Game: React.FC = () => {
           currentSession.score = session.data?.endGameSession.score || 0;
           updateSession(session.data?.endGameSession!);
           setIsExploding(session.data?.endGameSession.state === GameState.Completed);
+          setShowCloseModal(true);
         }
 
       } else {
@@ -107,8 +108,9 @@ const Game: React.FC = () => {
 
       </div>
 
-      {isExploding && (<EndModal
+      {isExploding && showCloseModal && (<EndModal
         onClick={() => push('/')}
+        onClose={() => setShowCloseModal(false)}
         score={currentSession?.score || 0}
       />)}
     </>
