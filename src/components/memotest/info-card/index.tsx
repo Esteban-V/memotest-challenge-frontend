@@ -18,7 +18,7 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
           p-4 rounded-3xl flex flex-col justify-between items-center hover:scale-105 transition-all group
           `}
     >
-      <h2 className="font-bold text-lg">{`#${item.id} - ${item.name}`}</h2>
+      <h2 className="font-bold text-lg whitespace-nowrap text-ellipsis w-32 overflow-hidden">{item.name}</h2>
       {!!highestScore && (
         <>
           <span className="font-bold">Highest score:</span>
