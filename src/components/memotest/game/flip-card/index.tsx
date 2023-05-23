@@ -21,6 +21,7 @@ const FlipCard: React.FC<FlipCardProps> = ({ backImage, frontText, isFlipped, on
           className="absolute w-full h-full bg-green-600 rounded-2xl shadow-md rotate-y-180 border-white border-4 backface-hidden overflow-hidden"
         >
           <Image
+            unoptimized
             width={100}
             height={100}
             alt={frontText}
