@@ -12,6 +12,8 @@ const CreationModal: React.FC<CreationModalProps> = ({ onClose, onCreate }) => {
   const [nameError, setNameError] = useState<string>("");
   const [name, setName] = useState<string>("");
 
+  // I could use a form library like formik or react-hook-form
+  // but I think it's overkill for this case
   const handleAppend = () => {
     //Check imageUrl is valid url
     if (!imageUrl) return;

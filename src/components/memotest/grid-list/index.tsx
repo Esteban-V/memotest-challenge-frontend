@@ -6,8 +6,8 @@ import { AiOutlinePlusCircle } from "react-icons/ai"
 
 const MemoTestList: React.FC<MemoTestListProps> = ({ items, paginatorInfo, onPageChange, itemClickHandler, showCreateCard, onClickCreate }) => {
   return (
-    <div className="flex flex-col min-h-full">
-      <div className="grid grid-cols-3 grid-rows-3 mb-10 gap-4 h-2/6">
+    <div className="flex flex-col">
+      <div className="grid grid-cols-3 grid-rows-3 mb-10 gap-4 h-full">
         {items.map((item: MemoTest, _) => (
           <MemoTestInfoCard
             key={item.id}
