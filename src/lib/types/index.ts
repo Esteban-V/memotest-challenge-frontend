@@ -10,8 +10,8 @@ export type Card = {
 }
 
 export enum GameState {
-  Started,
-  Completed
+  Started = "Started",
+  Completed = "Completed"
 }
 
 export type GameSession = {
