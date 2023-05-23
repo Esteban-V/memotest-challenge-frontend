@@ -34,16 +34,13 @@ const NewGameModal: React.FC<NewGameModalProps> = ({ memoTest, onClose, onStart 
 							+
 						</button>
 					</div>
-					<span className="cursor-pointer text-gray-400 text-sm underline" onClick={() => { setPairCount(maxPairs) }}>{`Max: ${maxPairs}`}</span>
+					<span className="cursor-pointer self-center text-gray-400 text-sm underline" onClick={() => { setPairCount(maxPairs) }}>{`Max: ${maxPairs}`}</span>
 					<button
 						className="mt-4 p-2 w-[100%] bg-purple-500 hover:bg-purple-600 text-white rounded-2xl"
 						onClick={() => onStart(memoTest, pairCount)}
 					>
 						Start Game
 					</button>
-				</div>
-				<div>
-
 				</div>
 			</div>
 
