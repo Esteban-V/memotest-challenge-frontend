@@ -5,11 +5,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 const GameDataContext = createContext<{
   gameData: GameData | null,
   setGameData: (data: GameData) => void,
+  createSession: (session: GameSession) => void,
   setCurrentSession: (session: GameSession) => void,
   updateSession: (session: GameSession) => void,
 }>({
   gameData: null,
   setGameData: (data: GameData) => { },
+  createSession: (session: GameSession) => { },
   setCurrentSession: (session: GameSession) => { },
   updateSession: (session: GameSession) => { },
 });
@@ -31,11 +33,20 @@ export const GameDataProvider = ({ children }: { children: React.ReactNode }) =>
     setGameDataState(data);
   };
 
-  const setCurrentSession = (session: GameSession) => {
+  const createSession = (session: GameSession) => {
     session.calculated_cards = calculateCards(session);
+    session.score = 0;
     session.progress = [];
     gameData.sessions.push(session);
+    const updatedGameData = {
+      ...gameData,
+      current_session: session
+    };
+    
+    setGameData(updatedGameData);
+  };
 
+  const setCurrentSession = (session: GameSession) => {
     const updatedGameData = {
       ...gameData,
       current_session: session
@@ -55,7 +66,7 @@ export const GameDataProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   return (
-    <GameDataContext.Provider value={{ gameData, setGameData, setCurrentSession, updateSession }}>
+    <GameDataContext.Provider value={{ gameData, setGameData, createSession, setCurrentSession, updateSession }}>
       {children}
     </GameDataContext.Provider>
   );
