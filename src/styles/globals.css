@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.cdnfonts.com/css/recoleta");
+
 @font-face {
   font-family: "ADELIA";
   src: url("../../public/fonts/ADELIA.otf");
@@ -21,4 +22,24 @@
 
 .backface-hidden {
   backface-visibility: hidden;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ffffff;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #a651f6;
+  border-radius: 10px;
+  border: 3px solid #a651f6;
 }
