@@ -5,12 +5,17 @@ export type START_GAME_SESSION_TYPE = {
   startGameSession: GameSession;
 };
 
+export type END_GAME_SESSION_TYPE = {
+  endGameSession: GameSession;
+};
+
 export const START_GAME_SESSION_MUTATION = gql`
   mutation START_GAME_SESSION_MUTATION($memoTestId: ID!, $numberOfPairs: Int!) {
     startGameSession(memoTestId: $memoTestId, numberOfPairs: $numberOfPairs) {
       id
       number_of_pairs
       retries
+      state
       memo_test {
         id
         name
@@ -21,12 +26,14 @@ export const START_GAME_SESSION_MUTATION = gql`
   }
 `;
 
-export const END_GAME_SESSION_RETRIES = gql`
-  mutation END_GAME_SESSION_RETRIES($gameSessionId: ID!) {
+export const END_GAME_SESSION = gql`
+  mutation END_GAME_SESSION($gameSessionId: ID!) {
     endGameSession(gameSessionId: $gameSessionId) {
       id
       number_of_pairs
       retries
+      state
+      score
       memo_test {
         id
         name
@@ -38,11 +45,12 @@ export const END_GAME_SESSION_RETRIES = gql`
 `;
 
 export const INCREMENT_GAME_SESSION_RETRIES = gql`
-  mutation GET_MEMOTESTS_PAGINATED($gameSessionId: ID!) {
+  mutation INCREMENT_GAME_SESSION_RETRIES($gameSessionId: ID!) {
     addTry(gameSessionId: $gameSessionId) {
       id
       number_of_pairs
       retries
+      state
       memo_test {
         id
         name

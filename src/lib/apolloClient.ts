@@ -1,4 +1,4 @@
-import { isServer } from "@/lib/utils";
+import { isServer } from "@/utils";
 import {
   ApolloClient,
   InMemoryCache,

@@ -7,8 +7,8 @@ export type GET_MEMOTESTS_PAGINATED_TYPE = {
 };
 
 export const GET_MEMOTESTS_PAGINATED = gql`
-  query GET_MEMOTESTS_PAGINATED($page: Int!) {
-    memoTests(page: $page, first: 9) {
+  query GET_MEMOTESTS_PAGINATED($page: Int!, $perPage: Int!) {
+    memoTests(page: $page, first: $perPage) {
       paginatorInfo {
         total
         perPage
