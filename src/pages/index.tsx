@@ -73,7 +73,7 @@ export default function Home() {
     <>
       <div className="flex flex-col-reverse sm:flex-row justify-center items-center min-h-screen min-w-max p-[5%] gap-5">
         {!!gameData?.sessions.length && (
-          <div className="w-3/5 p-10 rounded-3xl bg-gray-100">
+          <div className="w-full sm:w-3/5 p-6 rounded-3xl bg-gray-100">
             <SessionCardList
               title={"Past Games"}
               onClick={(item: GameSession) => {
@@ -86,36 +86,40 @@ export default function Home() {
         )}
         <div className="flex w-full flex-col items-center h-fit">
           <h1 className="text-4xl font-adelia mb-2">Memo Test</h1>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error || !data ? (
-            <div className="flex flex-col items-center gap-5">
-              <p>Something went wrong, please try again.</p>
-              <button
-                className="bg-purple-500 hover:bg-purple-600 text-white
+          <div className="flex flex-col items-center" style={{ height: "60vh" }}>
+            {loading ? (
+              <div className="h-full">
+                <p>Loading...</p>
+              </div>
+            ) : error || !data ? (
+              <div className="flex flex-col items-center gap-5">
+                <p>Something went wrong, please try again.</p>
+                <button
+                  className="bg-purple-500 hover:bg-purple-600 text-white
                   p-2 rounded-3xl w-20 flex flex-col items-center hover:scale-105 transition-all"
-                onClick={refetch}
-              >
-                Retry
-              </button>
-            </div>
-          ) : (
-            <>
-              <h2 className="text-lg mb-10">Select a category</h2>
-              <MemoTestList
-                onPageChange={setPage}
-                paginatorInfo={data.memoTests.paginatorInfo}
-                items={data.memoTests.data}
-                showCreateCard
-                onClickCreate={() => {
-                  setShowCreationModal(true);
-                }}
-                itemClickHandler={(item) => {
-                  setSelectedMemoTest(item);
-                }}
-              />
-            </>
-          )}
+                  onClick={refetch}
+                >
+                  Retry
+                </button>
+              </div>
+            ) : (
+              <>
+                <h2 className="text-lg mb-10">Select a category</h2>
+                <MemoTestList
+                  onPageChange={setPage}
+                  paginatorInfo={data.memoTests.paginatorInfo}
+                  items={data.memoTests.data}
+                  showCreateCard
+                  onClickCreate={() => {
+                    setShowCreationModal(true);
+                  }}
+                  itemClickHandler={(item) => {
+                    setSelectedMemoTest(item);
+                  }}
+                />
+              </>
+            )}
+          </div>
         </div>
       </div>
 
