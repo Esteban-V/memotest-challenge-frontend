@@ -9,7 +9,7 @@ const SessionCardList: React.FC<any> = ({ gameSessions, className, title, onClic
     >
       <h1 className="font-bold text-2xl">{title}</h1>
 
-      <div className="flex flex-col  max-h-96 gap-4 p-5 overflow-y-auto">
+      <div className="flex flex-col max-h-96 gap-4 overflow-y-auto overflow-visible">
         {gameSessions.map((gameSession: GameSession) => (
           <SessionCard key={gameSession.id} gameSession={gameSession} onClick={onClick} />
         ))}

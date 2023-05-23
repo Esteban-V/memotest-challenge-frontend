@@ -14,7 +14,7 @@ const SessionCard: React.FC<SessionCardProps> = ({ gameSession, onClick }) => {
           {!!score && (<span><strong>Score:</strong> {score}</span>)}
         </div>
         {(state != GameState.Completed) &&
-          <button onClick={() => { onClick(gameSession) }} className="p-2 bg-purple-500 hover:bg-purple-600 h-fit self-center
+          <button onClick={() => { onClick(gameSession) }} className="py-2 px-4 bg-purple-500 hover:bg-purple-600 h-fit self-center
           text-white rounded-2xl hover:font-bold hover:scale-105 transition-all">Resume</button>
         }
       </div>

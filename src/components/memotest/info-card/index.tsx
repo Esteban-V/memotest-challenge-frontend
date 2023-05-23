@@ -25,7 +25,7 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
           <span>{highestScore}</span>
         </>
       )}
-      <span className="text-lg h-fit mt-2 p-2 rounded-xl group-hover:font-bold group-hover:bg-white group-hover:text-black">Play</span>
+      <span className="text-lg h-fit mt-2 p-2 rounded-xl group-hover:font-bold">Play</span>
     </button>
   );
 };
