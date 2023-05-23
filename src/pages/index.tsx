@@ -84,9 +84,9 @@ export default function Home() {
             />
           </div>
         )}
-        <div className="flex w-full flex-col items-center h-fit">
+        <div className="flex w-full flex-col items-center">
           <h1 className="text-4xl font-adelia mb-2">Memo Test</h1>
-          <div className="flex flex-col items-center" style={{ height: "60vh" }}>
+          <div className="flex flex-col items-center">
             {loading ? (
               <div className="h-full">
                 <p>Loading...</p>
