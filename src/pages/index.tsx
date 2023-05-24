@@ -22,6 +22,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [showCreationModal, setShowCreationModal] = useState<boolean>(false);
   const [selectedMemoTest, setSelectedMemoTest] = useState<MemoTest | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data, loading, error, refetch } =
     useQuery<GET_MEMOTESTS_PAGINATED_TYPE>(GET_MEMOTESTS_PAGINATED, {
@@ -52,6 +53,8 @@ export default function Home() {
   }, [refetch]);
 
   const createGameSession = useCallback(async (item: MemoTest, pairCount: number) => {
+    setIsLoading(true);
+
     const apolloClient = initializeApollo();
     const { data, errors } = await apolloClient.mutate({
       mutation: START_GAME_SESSION_MUTATION,
@@ -67,6 +70,8 @@ export default function Home() {
       createSession(data.startGameSession);
       push("/game");
     }
+    
+    setIsLoading(false); 
   }, [createSession, push]);
 
   return (
@@ -126,6 +131,7 @@ export default function Home() {
       {selectedMemoTest && (
         <NewGameModal
           memoTest={selectedMemoTest}
+          isLoading={isLoading}
           onStart={(item: MemoTest, pairCount: number) => {
             createGameSession(item, pairCount);
           }}
