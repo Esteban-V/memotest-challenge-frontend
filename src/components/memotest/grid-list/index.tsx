@@ -16,8 +16,8 @@ const MemoTestList: React.FC<MemoTestListProps> = ({ items, paginatorInfo, onPag
           />
         ))}
         {showCreateCard && (
-          <div className="text-black border-4 border-dashed border-black cursor-pointer flex justify-center
-          p-4 rounded-3xl w-40 items-center hover:scale-105 transition-all"
+          <div className="flex justify-center h-40 w-40 text-black border-4 border-dashed border-black cursor-pointer
+          p-4 rounded-3xl items-center hover:scale-105 transition-all"
             onClick={onClickCreate}>
             <AiOutlinePlusCircle size={50} />
           </div>
