@@ -26,6 +26,7 @@ export default function Home() {
 
   const { data, loading, error, refetch } =
     useQuery<GET_MEMOTESTS_PAGINATED_TYPE>(GET_MEMOTESTS_PAGINATED, {
+      notifyOnNetworkStatusChange: true,
       variables: {
         page,
         perPage: 8,
@@ -102,7 +103,7 @@ export default function Home() {
                 <button
                   className="bg-purple-500 hover:bg-purple-600 text-white
                   p-2 rounded-3xl w-20 flex flex-col items-center hover:scale-105 transition-all"
-                  onClick={refetch}
+                  onClick={() => { refetch(); }}
                 >
                   Retry
                 </button>
