@@ -1,6 +1,7 @@
 export type MemoTest = {
   id: number;
   name: string;
+  high_score: number;
   image_urls: string[];
 }
 
@@ -24,6 +25,13 @@ export type GameSession = {
   progress: string[]; // Already flipped images
   score: number;
   created_at: string;
+}
+
+export type Session = {
+  id: number;
+  game_sessions: GameSession[];
+  created_at: string;
+  updated_at: string;
 }
 
 export type GameData = {

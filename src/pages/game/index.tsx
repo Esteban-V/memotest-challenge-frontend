@@ -12,7 +12,7 @@ import EndModal from '@/components/memotest/game/end-modal';
 
 const Game: React.FC = () => {
   const { push } = useRouter();
-  const { gameData, updateSession } = useGameData();
+  const { gameData, updateGame } = useGameData();
 
   const [isExploding, setIsExploding] = useState(false);
   const [showCloseModal, setShowCloseModal] = useState(false);
@@ -42,21 +42,21 @@ const Game: React.FC = () => {
       // Increment the retries both locally and on the server
       if (currentSession) {
         currentSession.retries += 1;
-        updateSession(currentSession);
+        updateGame(currentSession);
         incrementRetries({ variables: { gameSessionId: currentSession.id } });
       }
     } else if (flippedCards[0] && !flippedCards[1]) {
       if (flippedCards[0].image_url === card.image_url) {
         // If the two cards match, add to progress and unflip the cards
         progress && progress.push(card.image_url);
-        currentSession && updateSession(currentSession);
+        currentSession && updateGame(currentSession);
         setFlippedCards([null, null]);
 
         // If the progress is complete, end the game
         if (progress && progress.length === currentSession?.number_of_pairs) {
           const session = await endGameSession({ variables: { gameSessionId: currentSession.id } });
           currentSession.score = session.data?.endGameSession.score || 0;
-          updateSession(session.data?.endGameSession!);
+          updateGame(session.data?.endGameSession!);
           setIsExploding(session.data?.endGameSession.state === GameState.Completed);
           setShowCloseModal(true);
         }

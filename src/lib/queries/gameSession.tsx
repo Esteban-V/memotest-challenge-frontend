@@ -10,8 +10,8 @@ export type END_GAME_SESSION_TYPE = {
 };
 
 export const START_GAME_SESSION_MUTATION = gql`
-  mutation START_GAME_SESSION_MUTATION($memoTestId: ID!, $numberOfPairs: Int!) {
-    startGameSession(memoTestId: $memoTestId, numberOfPairs: $numberOfPairs) {
+  mutation START_GAME_SESSION_MUTATION($sessionId: ID!, $memoTestId: ID!, $numberOfPairs: Int!) {
+    startGameSession(sessionId: $sessionId, memoTestId: $memoTestId, numberOfPairs: $numberOfPairs) {
       id
       number_of_pairs
       retries

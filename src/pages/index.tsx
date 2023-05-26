@@ -17,7 +17,7 @@ import { useCallback, useState } from "react";
 
 export default function Home() {
   const { push } = useRouter();
-  const { setCurrentSession, createSession, gameData } = useGameData();
+  const { setCurrentGame: setCurrentGame, createGame: createGame, gameData, session } = useGameData();
 
   const [page, setPage] = useState(1);
   const [showCreationModal, setShowCreationModal] = useState<boolean>(false);
@@ -28,9 +28,11 @@ export default function Home() {
     useQuery<GET_MEMOTESTS_PAGINATED_TYPE>(GET_MEMOTESTS_PAGINATED, {
       notifyOnNetworkStatusChange: true,
       variables: {
+        sessionId: session,
         page,
         perPage: 8,
       },
+      skip: !session,
       fetchPolicy: "no-cache",
       onError: (error) => {
         console.error(error);
@@ -53,13 +55,15 @@ export default function Home() {
     }
   }, [refetch]);
 
-  const createGameSession = useCallback(async (item: MemoTest, pairCount: number) => {
+
+  const createGameSession = useCallback(async (session: string, item: MemoTest, pairCount: number) => {
     setIsLoading(true);
 
     const apolloClient = initializeApollo();
     const { data, errors } = await apolloClient.mutate({
       mutation: START_GAME_SESSION_MUTATION,
       variables: {
+        sessionId: session,
         memoTestId: item.id,
         numberOfPairs: pairCount,
       },
@@ -68,12 +72,12 @@ export default function Home() {
     if (errors) {
       console.log(errors);
     } else if (data) {
-      createSession(data.startGameSession);
+      createGame(data.startGameSession);
       push("/game");
     }
-    
-    setIsLoading(false); 
-  }, [createSession, push]);
+
+    setIsLoading(false);
+  }, [createGame, push]);
 
   return (
     <>
@@ -83,7 +87,7 @@ export default function Home() {
             <SessionCardList
               title={"Past Games"}
               onClick={(item: GameSession) => {
-                setCurrentSession(item);
+                setCurrentGame(item);
                 push("/game");
               }}
               gameSessions={gameData?.sessions}
@@ -129,12 +133,12 @@ export default function Home() {
         </div>
       </div>
 
-      {selectedMemoTest && (
+      {session && selectedMemoTest && (
         <NewGameModal
           memoTest={selectedMemoTest}
           isLoading={isLoading}
           onStart={(item: MemoTest, pairCount: number) => {
-            createGameSession(item, pairCount);
+            createGameSession(session, item, pairCount);
           }}
           onClose={() => {
             setSelectedMemoTest(null);
