@@ -9,7 +9,7 @@ import {
   CREATE_MEMOTEST,
   GET_MEMOTESTS_PAGINATED,
   GET_MEMOTESTS_PAGINATED_TYPE,
-} from "@/lib/queries/memoTest";
+} from "@/lib/queries/memotest";
 import { GameSession, MemoTest } from "@/lib/types";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
