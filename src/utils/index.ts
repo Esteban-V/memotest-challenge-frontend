@@ -35,18 +35,5 @@ export const calculateCards = (session: GameSession) => {
   return shuffledCards;
 };
 
-export const getPastSessions = (sessions: GameSession[], memotest: number) => {
-  return sessions.filter((session) => session.memo_test.id === memotest);
-}
-
-export const getHighestScore = (sessions: GameSession[] | undefined, memotest: number) => {
-  if(!sessions) return 0;
-
-  const pastSessions = getPastSessions(sessions, memotest);
-  const scores = pastSessions.map((session) => session.score);
-
-  return !!scores.length ? Math.max(...scores) : 0;
-}
-
 export const isServer = () => typeof window === 'undefined';
 export const isClient = () => typeof window !== 'undefined';

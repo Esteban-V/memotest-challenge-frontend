@@ -1,4 +1,3 @@
-import { getHighestScore } from "@/utils";
 import { MemoTestInfoCardProps } from "./types";
 import { useGameData } from "@/context/GameDataContext";
 
@@ -6,10 +5,6 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
   item,
   buttonClickHandler,
 }) => {
-  const { gameData } = useGameData();
-
-  const highestScore = getHighestScore(gameData?.sessions, item.id);
-
   return (
     <button
       onClick={() => buttonClickHandler(item)}
@@ -19,10 +14,10 @@ const MemoTestInfoCard: React.FC<MemoTestInfoCardProps> = ({
           `}
     >
       <h2 className="font-bold text-lg whitespace-nowrap text-ellipsis w-32 overflow-hidden">{item.name}</h2>
-      {!!highestScore && (
+      {!!item.high_score && (
         <>
           <span className="font-bold">Highest score:</span>
-          <span>{highestScore}</span>
+          <span>{item.high_score}</span>
         </>
       )}
       <span className="text-lg h-fit mt-2 p-2 rounded-xl group-hover:font-bold">Play</span>
