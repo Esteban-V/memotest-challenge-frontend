@@ -11,7 +11,7 @@ export type CREATE_MEMOTEST_TYPE = {
 };
 
 export const GET_MEMOTESTS_PAGINATED = gql`
-  query GET_MEMOTESTS_PAGINATED($sessionId: ID!, $page: Int!, $perPage: Int!) {
+  query GET_MEMOTESTS_PAGINATED($page: Int!, $perPage: Int!) {
     memoTests(page: $page, first: $perPage) {
       paginatorInfo {
         total
@@ -22,7 +22,7 @@ export const GET_MEMOTESTS_PAGINATED = gql`
         id
         name
         image_urls
-        high_score(sessionId: $sessionId)
+        high_score
       }
     }
   }

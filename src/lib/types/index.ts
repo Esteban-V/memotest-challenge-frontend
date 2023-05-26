@@ -27,13 +27,6 @@ export type GameSession = {
   created_at: string;
 }
 
-export type Session = {
-  id: number;
-  game_sessions: GameSession[];
-  created_at: string;
-  updated_at: string;
-}
-
 export type GameData = {
   current_session: GameSession | null;
   sessions: GameSession[];

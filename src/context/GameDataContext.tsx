@@ -1,51 +1,25 @@
-import { CREATE_SESSION, CREATE_SESSION_TYPE } from "@/lib/queries/session";
 import { GameData, GameSession } from "@/lib/types";
 import { calculateCards } from "@/utils";
-import { useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const GameDataContext = createContext<{
-  session: string | null,
   gameData: GameData | null,
   setGameData: (data: GameData) => void,
-  createGame: (session: GameSession) => void,
-  setCurrentGame: (session: GameSession) => void,
-  updateGame: (session: GameSession) => void,
+  createGame: (game: GameSession) => void,
+  setCurrentGame: (game: GameSession) => void,
+  updateGame: (game: GameSession) => void,
 }>({
-  session: null,
   gameData: null,
   setGameData: (data: GameData) => { },
-  createGame: (session: GameSession) => { },
-  setCurrentGame: (session: GameSession) => { },
-  updateGame: (session: GameSession) => { },
+  createGame: (game: GameSession) => { },
+  setCurrentGame: (game: GameSession) => { },
+  updateGame: (game: GameSession) => { },
 });
 
 export const useGameData = () => useContext(GameDataContext);
 
 export const GameDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [gameData, setGameDataState] = useState<GameData>({ sessions: [], current_session: null });
-  const router = useRouter();
-
-  const [createSessionMutation] = useMutation<CREATE_SESSION_TYPE>(CREATE_SESSION);
-  const [session, setSession] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    const savedSessionId = localStorage.getItem('sessionId');
-    
-    if (!savedSessionId) {
-      createSessionMutation().then(result => {
-        const newSessionId = result.data?.createSession.id?.toString() || "";
-        localStorage.setItem('sessionId', newSessionId);
-        setSession(newSessionId);
-      }).catch(error => {
-        console.error('Failed to create a session', error);
-      });
-    } else {
-      setSession(savedSessionId);
-    }
-  }, [router.isReady]);
 
   const setGameData = (data: GameData) => {
     localStorage.setItem('gameData', JSON.stringify(data));
@@ -85,7 +59,7 @@ export const GameDataProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   return (
-    <GameDataContext.Provider value={{ session, gameData, setGameData, createGame, setCurrentGame, updateGame }}>
+    <GameDataContext.Provider value={{ gameData, setGameData, createGame, setCurrentGame, updateGame }}>
       {children}
     </GameDataContext.Provider>
   );

@@ -17,7 +17,7 @@ import { useCallback, useState } from "react";
 
 export default function Home() {
   const { push } = useRouter();
-  const { setCurrentGame: setCurrentGame, createGame: createGame, gameData, session } = useGameData();
+  const { setCurrentGame: setCurrentGame, createGame: createGame, gameData } = useGameData();
 
   const [page, setPage] = useState(1);
   const [showCreationModal, setShowCreationModal] = useState<boolean>(false);
@@ -28,11 +28,9 @@ export default function Home() {
     useQuery<GET_MEMOTESTS_PAGINATED_TYPE>(GET_MEMOTESTS_PAGINATED, {
       notifyOnNetworkStatusChange: true,
       variables: {
-        sessionId: session,
         page,
         perPage: 8,
       },
-      skip: !session,
       fetchPolicy: "no-cache",
       onError: (error) => {
         console.error(error);
@@ -56,14 +54,13 @@ export default function Home() {
   }, [refetch]);
 
 
-  const createGameSession = useCallback(async (session: string, item: MemoTest, pairCount: number) => {
+  const createGameSession = useCallback(async (item: MemoTest, pairCount: number) => {
     setIsLoading(true);
 
     const apolloClient = initializeApollo();
     const { data, errors } = await apolloClient.mutate({
       mutation: START_GAME_SESSION_MUTATION,
       variables: {
-        sessionId: session,
         memoTestId: item.id,
         numberOfPairs: pairCount,
       },
@@ -133,12 +130,12 @@ export default function Home() {
         </div>
       </div>
 
-      {session && selectedMemoTest && (
+      {selectedMemoTest && (
         <NewGameModal
           memoTest={selectedMemoTest}
           isLoading={isLoading}
           onStart={(item: MemoTest, pairCount: number) => {
-            createGameSession(session, item, pairCount);
+            createGameSession(item, pairCount);
           }}
           onClose={() => {
             setSelectedMemoTest(null);
