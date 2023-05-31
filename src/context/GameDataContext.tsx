@@ -1,6 +1,6 @@
 import { GameData, GameSession } from "@/lib/types";
 import { calculateCards } from "@/utils";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const GameDataContext = createContext<{
   gameData: GameData | null,
@@ -20,6 +20,15 @@ export const useGameData = () => useContext(GameDataContext);
 
 export const GameDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [gameData, setGameDataState] = useState<GameData>({ sessions: [], current_session: null });
+
+  useEffect(() => {
+    const localData = localStorage.getItem('gameData');
+    if (localData) {
+      setGameDataState(JSON.parse(localData));
+    } else {
+      setGameDataState({ sessions: [], current_session: null });
+    }
+  }, []);
 
   const setGameData = (data: GameData) => {
     localStorage.setItem('gameData', JSON.stringify(data));
